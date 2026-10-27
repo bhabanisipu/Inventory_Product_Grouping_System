@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory & Product Grouping System</title>
+    <link rel="stylesheet"
+          href="../static/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Inventory & Product Grouping System</h1>
+            <p>Discover product groups using Machine Learning</p>
+        </header>
+
+        <section class="form-section">
+            <h2>Enter Product Details</h2>
+
+            <form method="POST" action="/">
+                <div class="form-group">
+                    <label for="inventory_level">Inventory Level</label>
+                    <input
+                        type="number"
+                        id="inventory_level"
+                        name="inventory_level"
+                        min="0"
+                        step="any"
+                        placeholder="Enter inventory level"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label for="units_sold">Total Units Sold</label>
+                    <input
+                        type="number"
+                        id="units_sold"
+                        name="units_sold"
+                        min="0"
+                        step="any"
+                        placeholder="Enter total units sold"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label for="price">Product Price</label>
+                    <input
+                        type="number"
+                        id="price"
+                        name="price"
+                        min="0"
+                        step="any"
+                        placeholder="Enter product price"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label for="demand">Demand</label>
+                    <input
+                        type="number"
+                        id="demand"
+                        name="demand"
+                        min="0"
+                        step="any"
+                        placeholder="Enter product demand"
+                        required>
+                </div>
+
+                <button type="submit">Predict Product Group</button>
+            </form>
+        </section>
+
+        {% if result %}
+        <section class="result-section">
+            <h2>Prediction Result</h2>
+
+            <div class="result-card">
+                <p>
+                    <strong>Cluster Number:</strong>
+                    {{ result.cluster }}
+                </p>
+
+                <p>
+                    <strong>Product Group:</strong>
+                </p>
+
+                <h3>{{ result.product_group }}</h3>
+            </div>
+        </section>
+        {% endif %}
+
+        {% if error %}
+        <section class="error-section">
+            <h3>Prediction Error</h3>
+            <p>{{ error }}</p>
+        </section>
+        {% endif %}
+
+        <footer>
+            <p>Powered by Python, Flask and K-Means Clustering</p>
+        </footer>
+    </div>
+</body>
+</html>
